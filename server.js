@@ -20,5 +20,13 @@ app.use(cors())
 app.use('/api/user',userRouter)
 
 // end points
-app.get("/", (req, res) => res.send("Hello World!"));
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.get("/", (req, res) => {
+  try {
+    res.send("Hello World!");
+  } catch (err) {
+    console.error("Error in / route:", err.message);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
